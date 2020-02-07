@@ -23,9 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = 'FALSE'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ['recipe-collections.herokuapp.com', 'www.recipe-collections.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1',
+                 '127.0.0.1:8000',
+                 'recipe-collections.herokuapp.com',
+                 'www.recipe-collections.herokuapp.com',
+                 ]
 
 
 # Application definition
@@ -54,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -71,8 +79,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.middleware.gzip.GZipMiddleware',
-                'whitenoise.middleware.WhiteNoiseMiddleware',
             ],
         },
     },
@@ -91,7 +97,7 @@ DATABASES = {
         'USER': os.getenv('DATABASE_USER'),
         'HOST': os.getenv('DATABASE_HOST'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'PORT': os.getenv('DATABASE_PORT')
+        'PORT': 5432
     }
 }
 
@@ -135,7 +141,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "core/static")
 
-MEDIA_ROOT = './core/static/media/'
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
 
 # Authentication
