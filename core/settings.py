@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['recipe-collections.herokuapp.com', 'www.recipe-collections.herokuapp.com']
 
 
 # Application definition
@@ -71,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.middleware.gzip.GZipMiddleware',
+                'whitenoise.middleware.WhiteNoiseMiddleware',
             ],
         },
     },
@@ -149,6 +151,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+# Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 # Custom settings
 
 REVIEWS = {
@@ -173,3 +179,4 @@ POPULAR = {
 CATEGORIES = {
     'browse_row_length': 4
 }
+
