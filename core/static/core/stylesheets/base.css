@@ -4,7 +4,6 @@ html {
     max-width: 100%;
     min-height: 100%;
     overflow-x: hidden;
-    overflow-x: -moz-hidde-unscrollable;
 }
 
 p:hover, p:visited, p:active, a:hover, a:visited, a:link, a:active
