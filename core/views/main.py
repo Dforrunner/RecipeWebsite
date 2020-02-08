@@ -20,10 +20,12 @@ def popular(request):
     Displays the main content view with "popular" recipes. A recipes is considered "popular" if it has at least the
     amount of reviews as configured and has a average rating of at least the configured value.
     """
-    recipe_list = Recipe.objects.raw(
-        RawQueries.popular_select,
-        [settings.POPULAR['rating_threshold'], settings.POPULAR['review_count_threshold']]
-    )
+    # TODO: Fix query filter for popular recipes
+    recipe_list = Recipe.objects.all()
+    #     Recipe.objects.raw(
+    #     RawQueries.popular_select,
+    #     [settings.POPULAR['rating_threshold'], settings.POPULAR['review_count_threshold']]
+    # )
     return render(request, 'core/main/popular.html', {'recipe_list': recipe_list, 'explore': 'popular'})
 
 
@@ -32,10 +34,13 @@ def trending(request):
     Displays the main content view with "trending" recipes. A recipes is considered "trending" when it has received the
     configured amount of review within the configured time window.
     """
-    recipe_list = Recipe.objects.raw(
-        RawQueries.trending_select,
-        [settings.TRENDING['time_window'], settings.TRENDING['review_count']]
-    )
+
+    # TODO: Fix query filter for trending recipes
+    recipe_list = Recipe.objects.all()
+    #     Recipe.objects.raw(
+    #     RawQueries.trending_select,
+    #     [settings.TRENDING['time_window'], settings.TRENDING['review_count']]
+    # )
     return render(request, 'core/main/trending.html', {'recipe_list': recipe_list, 'explore': 'trending'})
 
 

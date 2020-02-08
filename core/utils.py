@@ -7,7 +7,7 @@ class RawQueries:
         FROM        core_recipe AS rec
         JOIN        core_review AS rev ON rev.recipe_id = rec.id
         GROUP BY    rec.id
-        HAVING      avg_rating >= %s
+        HAVING      avg_2rating >= %s
         AND         review_count >= %s
         ORDER BY    review_count DESC, avg_rating DESC;
         """
